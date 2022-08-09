@@ -1,5 +1,7 @@
 import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
+//css语法降级、补全前缀
+import postcssPresetEnv from "postcss-preset-env"
 
 export default defineConfig({
   plugins: [vue()],
@@ -24,5 +26,8 @@ export default defineConfig({
       },
     },
     devSourcemap: true, //开启样式文件sourcemap
+    postcss: {
+      plugins: [postcssPresetEnv()],
+    },
   },
 })
