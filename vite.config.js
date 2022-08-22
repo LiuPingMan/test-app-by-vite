@@ -1,16 +1,15 @@
-import { defineConfig, loadEnv } from "vite"
+import { defineConfig } from "vite"
 
 import viteBaseConfig from "./vite.base.config"
-import viteDevConfig from "./vite.dev.config"
 import viteProdConfig from "./vite.prod.config"
-
-const envResolver = {
-  build: () => Object.assign({}, viteBaseConfig, viteProdConfig),
-  serve: () => Object.assign({}, viteBaseConfig, viteDevConfig),
-}
+//vite.dev.config中defineConfig的参数为function，返回值亦为function
+import viteDevConfig from "./vite.dev.config"
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
-  const env = loadEnv(mode, process.cwd(), "ENV") //按照mode将环境配置文件及process.env中的以'ENV'为前缀的变量返回
-  return envResolver[command]()
+  const envResolver = {
+    build: Object.assign({}, viteBaseConfig, viteProdConfig),
+    serve: Object.assign({}, viteBaseConfig, viteDevConfig({ command, mode })),
+  }
+  return envResolver[command]
 })

@@ -1,11 +1,14 @@
 import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
+//css原子化
+import unocss from "unocss/vite"
+import { presetUno, presetAttributify, presetIcons } from "unocss"
 //css语法降级、补全前缀
 import postcssPresetEnv from "postcss-preset-env"
 import path from "path"
 
+console.log("55555555555")
 export default defineConfig({
-  plugins: [vue()],
   envPrefix: "ENV", //将环境配置文件中以‘ENV’为前缀的属性配置到import.meta.env中
   optimizeDeps: {
     exclude: [], //将数组中的依赖不进行依赖预构建
@@ -36,18 +39,22 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  build: {
-    //配置rollup的构建策略
-    rollupOptions: {
-      //控制输出
-      output: {
-        //配置静态资源的打包后文件名
-        assetFileNames: "[name].[hash].[ext]",
-      },
-    },
-    assetsInlineLimit: 20 * 1024, //将小于20kb的静态资源打包为base64
-    outDir: "dist", //配置打包输出的文件夹名,默认为dist
-    assetsDir: "assets", //配置静态资源打包目录，默认为assets
-    emptyOutDir: true, //打包前清空打包目录，默认为true
-  },
+  plugins: [
+    vue(),
+    unocss({
+      //使用unocss
+      presets: [presetUno(), presetAttributify(), presetIcons()],
+      rules: [
+        [
+          "p-c",
+          {
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%,-50%)",
+          },
+        ],
+      ],
+    }),
+  ],
 })
