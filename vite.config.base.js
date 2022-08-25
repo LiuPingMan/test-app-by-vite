@@ -7,7 +7,6 @@ import { presetUno, presetAttributify, presetIcons } from "unocss"
 import postcssPresetEnv from "postcss-preset-env"
 import path from "path"
 
-console.log("55555555555")
 export default defineConfig({
   envPrefix: "ENV", //将环境配置文件中以‘ENV’为前缀的属性配置到import.meta.env中
   optimizeDeps: {
