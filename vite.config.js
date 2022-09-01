@@ -7,6 +7,7 @@ import { presetUno, presetAttributify, presetIcons } from "unocss"
 //css语法降级、补全前缀
 import postcssPresetEnv from "postcss-preset-env"
 import { viteMockServe } from "vite-plugin-mock"
+import svgLoader from "vite-svg-loader"
 
 export default defineConfig(({ command, mode }) => {
   const { ENV_BASE_API, ENV_TARGET_URL } = loadEnv(mode, process.cwd(), "ENV") //按照mode将环境配置文件及process.env中的以'ENV'为前缀的变量返回
@@ -88,6 +89,27 @@ export default defineConfig(({ command, mode }) => {
       viteMockServe({
         //mock文件路径，默认值mock
         path: "mock",
+      }),
+      svgLoader({
+        svgoConfig: {
+          plugins: [
+            {
+              name: "cleanupIDs",
+              params: {
+                prefix: {
+                  // 避免不同 svg 内部的 filter id 相同导致样式错乱
+                  // https://github.com/svg/svgo/issues/674#issuecomment-328774019
+                  toString() {
+                    let count = this.count ?? 0
+                    count++
+                    this.count = count
+                    return `svg-random-${count.toString(36)}-`
+                  },
+                },
+              },
+            },
+          ],
+        },
       }),
     ],
   }

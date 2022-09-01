@@ -9,6 +9,9 @@ const count = ref(0)
 </script>
 
 <template>
+  <svg>
+    <use :xlink:href="logo"></use>
+  </svg>
   <h1>{{ msg }}</h1>
 
   <div class="card">
