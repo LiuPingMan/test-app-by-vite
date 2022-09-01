@@ -3,8 +3,10 @@ import { createApp } from "vue"
 import "uno.css"
 import "./style.css"
 import App from "./App.vue"
+import SvgRaw from "./components/SvgRaw.vue"
+const app = createApp(App)
 
-createApp(App).mount("#app")
+app.component("SvgRaw", SvgRaw).mount("#app")
 
 fetch("/api/users", {
   method: "post",

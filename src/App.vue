@@ -3,6 +3,7 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import HelloWorld from "./components/HelloWorld.vue"
 import { test } from "@/api/test"
+import SvgRaw from "./components/SvgRaw.vue"
 
 const handleTestBtnClick = () => {
   test()
@@ -11,6 +12,7 @@ const handleTestBtnClick = () => {
 
 <template>
   <div>
+    <SvgRaw name="logo" class="color1"></SvgRaw>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
     </a>
@@ -33,5 +35,8 @@ const handleTestBtnClick = () => {
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+.color1 :deep(path) {
+  fill: red;
 }
 </style>
