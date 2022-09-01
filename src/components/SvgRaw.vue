@@ -37,7 +37,6 @@ const currentComponent = computed(() => {
 // data-v-hash
 let scopeId = ""
 if (instance?.type) {
-  console.log(instance)
   // __scopeId 存在的条件是 <style scoped>
   const __scopeId = instance?.type?.__scopeId
   if (__scopeId) {
