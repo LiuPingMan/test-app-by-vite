@@ -10,7 +10,9 @@
     "test": "vite --mode test"
   },
   "dependencies": {
+    "amfe-flexible": "^2.2.1",
     "axios": "^0.27.2",
+    "lodash-es": "^4.17.21",
     "vue": "^3.2.37"
   },
   "devDependencies": {
@@ -22,6 +24,7 @@
     "less-loader": "^11.0.0",
     "mockjs": "^1.1.0",
     "postcss-preset-env": "^7.7.2",
+    "postcss-pxtorem": "^6.0.0",
     "unocss": "^0.45.9",
     "vite": "^3.0.0",
     "vite-plugin-mock": "^2.9.6",
